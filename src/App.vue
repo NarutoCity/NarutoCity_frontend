@@ -9,11 +9,13 @@
       <router-link to="/news">深科技</router-link>
         </li>
         </ul>
-      <ul>
-        <li>
-          <router-link to="/login">登录</router-link>
-        </li>
-      </ul>
+      <div>
+          <div v-if="this.$store.state.username">
+          <a>{{ this.$store.state.username }}</a>
+          <a @click="logout">注销</a>
+        </div>
+          <router-link v-else to="/login">登录</router-link>
+        </div>
     </div>
     <div><router-view/></div>
     <!--<h1>{{msg}}</h1>-->
@@ -22,6 +24,7 @@
 </template>
 
 <script>
+  import Cookie from 'vue-cookies'
   export default {
     name: 'app',
     data() {
@@ -30,40 +33,16 @@
       }
     },
     methods:{
-      change(){
-        let str=this.msg;
-        str = str.split('').reverse().join();
-        this.msg=str
+      logout(){
+        this.$store.state.username=''
+        this.$store.state.token=''
+        Cookie.remove('username')
+        Cookie.remove('token')
       }
     }
   }
 </script>
 
 <style>
-  #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    margin-top: 60px;
-  }
 
-  h1, h2 {
-    font-weight: normal;
-  }
-
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-
-  li {
-    display: inline-block;
-    margin: 0 10px;
-  }
-
-  a {
-    color: #42b983;
-  }
 </style>
