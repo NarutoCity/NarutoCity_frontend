@@ -4,7 +4,7 @@
     <div class="titleWrap">
       <div class="title-content">
         <span>专题课程</span>
-        <h3>{{data.course.name}}</h3>
+        <h3>{{data.name}}</h3>
         <span>
           {{data.course_slogan}}
         </span>
@@ -31,21 +31,29 @@
         <div class="body-summary">
           <div class="summary-item">
             <h4 class="item-title">课程概述</h4>
-            <p>{{data.course.brief}}</p>
+            <p>{{data.brief}}</p>
             <div>
               <span class="cou-ceil">学习时间：{{data.hours}}</span>
               <span class="cou-ceil">难度：{{data.level}}</span>
-              <span class="cou-ceil">已学习人数：<!-- 学习人数从数据库反向查询 --></span>
+              <span class="cou-ceil">已学习人数：<!-- 学习人数从数据库反向查询 -->#</span>
             </div>
             <div>
               <ul>
-                <li><!-- v-for用Vue填充，价格策略从数据库中获取 --></li>
+                <li v-for="policy in data.price_policy">
+                  <span>{{policy.price}}</span>
+                  <span>{{policy.valid_period}}</span>
+                </li>
               </ul>
             </div>
             <div>
               开课时通知我
             </div>
           </div>
+
+          <div class="summary-item">
+
+          </div>
+
           <div class="summary-item">
             <h4>为什么学习这门课程？</h4>
             <div>
@@ -68,7 +76,7 @@
                 <div>
                   <h5><!-- 数据库CourseOutlines表中的标题字段 ---></h5>
                   <pre>
-                    <!-- 数据库CourseOutlines表中的内容字段 -->
+                      <!-- 数据库CourseOutlines表中的内容字段 -->
                   </pre>
                 </div>
                 <!-- v-for填充CourseOutlines表中的数据 -->
@@ -77,19 +85,19 @@
           </div>
           <div class="summary-item">
             <div>
-              <h5>此项目如何有助于我的职业生涯？</h5>
+              <h4>此项目如何有助于我的职业生涯？</h4>
               <p>{{data.career_improvement}}</p>
             </div>
             <ul>
               <li>
-                <h5>课程先修要求</h5>
+                <h4>课程先修要求</h4>
                 <p>{{data.prerequisite}}</p>
               </li>
               <li>
-                <h5>推荐课程</h5>
+                <h4>推荐课程</h4>
                 <span>若你缺乏相关经验，建议学习以下课程</span>
                 <ul>
-                  <li v-for="for rec_course in data.recommend_courses">
+                  <li v-for="rec_course in data.recommend_courses">
                     <router-link :to="{name:'CourseDetail',params:{id:rec_course.id}}">{{rec_course.name}}</router-link>
                   </li>
                 </ul>
@@ -104,7 +112,6 @@
         <div class="body-question" style="display: none">常见问题详细</div>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -122,12 +129,13 @@
     methods: {
       initCourseDetail() {
         let that = this;
-        let url = 'http://192.168.20.22:8000/api/coursedetail/' + this.$route.params.id;
+        let url = this.$store.state.apiList.courses + this.$route.params.id + '/';
         this.$axios.request({
           url: url,
           responseType: 'json'
         }).then(function (response) {
           that.data = response.data
+          console.log(1)
         })
       }
     }

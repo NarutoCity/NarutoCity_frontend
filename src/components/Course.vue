@@ -29,7 +29,7 @@
       initCourses() {
         let that = this;
         this.$axios.request({
-          url: 'http://192.168.20.22:8000/api/courses',
+          url: this.$store.state.apiList.courses,
           responseType: 'json'
         }).then(function (response) {
           that.courseList = response.data

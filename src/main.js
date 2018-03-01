@@ -1,14 +1,16 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import axios from 'axios'
+import store from './store/store'
 import ElementUI from 'element-ui'
 import App from './App.vue'
 import routerConfig from './router.config'
 
-Vue.use(VueRouter);
-Vue.use(ElementUI);
-Vue.prototype.$axios = axios;
-const router = new VueRouter(routerConfig);
+Vue.use(VueRouter)
+Vue.use(ElementUI)
+Vue.prototype.$axios = axios
+Vue.prototype.$store = store
+const router = new VueRouter(routerConfig)
 
 new Vue({
   el: '#app',
