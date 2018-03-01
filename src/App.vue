@@ -8,14 +8,15 @@
           <router-link :to="{name:'Micro'}">学位</router-link>
           <router-link :to="{name:'News'}">深科技</router-link>
         </li>
-      </ul>
 
-      <ul>
-        <li>
-          <router-link :to="{name:'Login'}">登录</router-link>
-        </li>
-      </ul>
-
+        </ul>
+      <div>
+          <div v-if="this.$store.state.username">
+          <a>{{ this.$store.state.username }}</a>
+          <a @click="logout">注销</a>
+        </div>
+          <router-link v-else to="/login">登录</router-link>
+        </div>
     </div>
 
     <div>
@@ -26,12 +27,29 @@
 </template>
 
 <script>
+  import Cookie from 'vue-cookies'
   export default {
-    name: 'app'
+
+    name: 'app',
+    data() {
+      return {
+        msg: 'Welcome to Your Vue.js App'
+      }
+    },
+    methods:{
+      logout(){
+        this.$store.state.username=''
+        this.$store.state.token=''
+        Cookie.remove('username')
+        Cookie.remove('token')
+      }
+    }
+
   }
 </script>
 
 <style>
+
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -44,17 +62,4 @@
     font-weight: normal;
   }
 
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-
-  li {
-    display: inline-block;
-    margin: 0 10px;
-  }
-
-  a {
-    color: #42b983;
-  }
 </style>

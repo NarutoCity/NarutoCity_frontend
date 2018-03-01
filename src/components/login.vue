@@ -4,7 +4,8 @@
       <input type="text" placeholder="请输入用户名" v-model="username">
     <label for="">密码：</label>
       <input type="password" placeholder="请输入密码" v-model="password">
-    <a class="btn" @click="doLogin">登录</a>{{ error }}
+    <a class="btn" @click="doLogin">提交</a>
+    <p style="color: red;">{{ error }}</p>
 
   </div>
 </template>
@@ -24,7 +25,7 @@
         console.log(this);
         var that = this;
         this.$axios.request({
-          url: 'http://127.0.0.1:8000/api/login',
+          url: 'http://127.0.0.1:8000/api/login/',
           method: 'POST',
           data: {
             username: this.username,
@@ -32,13 +33,11 @@
           },
           responseType: 'json'
         }).then(function (response) {
-          console.log(response);
-          // 登录成功之跳转到首页
-          that.$router.push('/index')
-        }).catch(function (error) {
-          console.log(error);
-          // 登录失败在页面显示失败信息
-          that.error = error.data
+         if (response.data.status=='1000'){
+            that.$store.commit('saveToken',response.data)
+            that.$router.push('/index')
+          }else {
+            that.error=response.data.msg}
         })
       }
     }
