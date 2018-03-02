@@ -37,7 +37,7 @@
       initArticles: function () {
         let that = this;
         this.$axios.request({
-          url: 'http://127.0.0.1:8001/api/articles/',
+          url: this.$store.state.apiList.news,
           method: 'GET',
         }).then(function (response) {
           that.articleList = response.data.data.results

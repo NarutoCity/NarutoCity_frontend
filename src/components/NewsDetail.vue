@@ -72,8 +72,8 @@
     methods: {
       initArticleDetail: function () {
         let that = this;
-        let nid = this.$route.params.nid;
-        let url = 'http://127.0.0.1:8001/api/article/' + nid + '/';
+        nid = this.$route.params.nid;
+        url = this.$store.state.apiList.news + nid + '/';
         this.$axios.request({
           url: url,
           method: 'GET',

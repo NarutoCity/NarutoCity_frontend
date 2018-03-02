@@ -129,7 +129,7 @@
     methods: {
       initCourseDetail() {
         let that = this;
-        let url = this.$store.state.apiList.courses + this.$route.params.id + '/';
+        let url = this.$store.state.apiList.course + this.$route.params.id + '/';
         this.$axios.request({
           url: url,
           responseType: 'json'
