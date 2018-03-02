@@ -1,34 +1,34 @@
 <template>
   <div id="news">
     <div style="width: 834px; margin-right: 30px"><h2 class="article-title">
-      {{article.title}}</h2>
+      {{articleInfo.title}}</h2>
       <div style="margin-top: 18px; margin-bottom: 30px; display: flex; align-items: center">
-        <time class="arc-time">{{article.date}}</time>
+        <time class="arc-time">{{articleInfo.date}}</time>
         <div class="arc-time view-num view"><img style="margin-right: 8px"
                                                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAARCAMAAAD5TTx4AAAAZlBMVEUAAAD6+vr19fW7u7vz8/Po6Ojd3d3BwcHu7u6xsbGhoaH39/esrKyfn5+kpKTa2trPz8/Kysq0tLSdnZ3+/v7W1tbMzMy+vr6vr6+lpaWbm5vX19fS0tLFxcWrq6uoqKji4uK2trbymnlNAAAAAXRSTlMAQObYZgAAAN5JREFUGNNlkem2gjAMhLvvG0VkEVDf/yVv21wFNX++OZ1Jc5qid5GBOmMcHQj6LkV7nQTnIumeqg8LS9O9G0hnJD48fpe2QGTvsyjCjnf+8m7zo0KalfPVyKof4QbedWIQaWAhNrhr8zIMmAVkxdxgdXEHDR5ZgAgvBDgN6Nn9v8VfQFx6BWJ7IuvW4+ycSs6W+3bopRQBx4ZuJxVEU1wRZAGWwdaBVFdUNe68gGWvdZ9Z28p47CgaWc9UjKqmpInoVGTzVLQwFtRv3x/DklvCNIXFpXrJTxEuBD83/QGksAmsvSW/fAAAAABJRU5ErkJggg=="
                                                  width="14" height="8" alt=""> 阅读<span
-          style="display:inline-block; margin-left: 8px">{{article.view_num}}</span></div>
+          style="display:inline-block; margin-left: 8px">{{articleInfo.view_num}}</span></div>
         <div class="arc-time view-num like"><i style="display:inline-block; margin-right: 8px"
                                                class="fa fa-thumbs-o-up" aria-hidden="true"
         ></i> 点赞<span
-          style="display:inline-block; margin-left: 8px">{{article.up_num}}</span></div>
+          style="display:inline-block; margin-left: 8px">{{articleInfo.up_num}}</span></div>
         <div class="arc-time view-num love"><i style="display:inline-block; margin-right: 8px"
                                                class="fa fa-heart-o" aria-hidden="true"
         ></i> 收藏<span
-          style="display:inline-block; margin-left: 8px">{{article.collect_num}}</span></div>
+          style="display:inline-block; margin-left: 8px">{{articleInfo.collect_num}}</span></div>
       </div>
       <div class="arc-content">
-        <div class="main-cont" v-html="article.content"></div>
+        <div class="main-cont" v-html="articleInfo.content"></div>
         <div style="margin-top: 21px; display: flex; align-items: center; margin-bottom: 68px">
           <div> <!--v-for-start--><span class="tag-time">#编程语言#</span><!--v-for-end-->
           </div>
           <div style="cursor: pointer; margin-left:auto; margin-right: 30px" class="like-btn like-bkg"><i
             style="display:inline-block; margin-left: 25px" class="fa fa-thumbs-o-up" aria-hidden="true"
-          ></i> <span class="like-num">点赞&nbsp;|&nbsp;<b>{{article.up_num}}</b></span>
+          ></i> <span class="like-num">点赞&nbsp;|&nbsp;<b>{{articleInfo.up_num}}</b></span>
           </div>
           <div style="cursor: pointer" class="like-btn love-bkg"><i
             style="display:inline-block; margin-left: 22px" class="fa fa-heart-o" aria-hidden="true"></i>
-            <span class="love-num">收藏&nbsp;|&nbsp;<b>{{article.collect_num}}</b></span></div>
+            <span class="love-num">收藏&nbsp;|&nbsp;<b>{{articleInfo.collect_num}}</b></span></div>
         </div>
       </div>
       <div class="comment-wrap" style="padding-bottom: 300px">
@@ -63,7 +63,7 @@
     name: 'NewDetail',
     data() {
       return {
-        article: {},
+        articleInfo: {},
       }
     },
     mounted: function () {  // 加载文档数时，触发initArticles
@@ -72,13 +72,10 @@
     methods: {
       initArticleDetail: function () {
         let that = this;
-        nid = this.$route.params.nid;
-        url = this.$store.state.apiList.news + nid + '/';
         this.$axios.request({
-          url: url,
-          method: 'GET',
+          url: this.$store.state.apiList.news + this.$route.params.id + '/',
         }).then(function (response) {
-          that.article = response.data.data;
+          that.articleInfo = response.data;
         }).catch(function (response) {
           alert(response)
         })

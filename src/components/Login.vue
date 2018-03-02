@@ -25,8 +25,8 @@
         console.log(this);
         let that = this;
         this.$axios.request({
-          url: 'http://127.0.0.1:8000/api/login/',
-          method: 'POST',
+          url: this.$store.state.apiList.auth,
+          method: 'post',
           data: {
             username: this.username,
             password: this.password
