@@ -4,19 +4,24 @@
       <ul>
         <li>
           <router-link :to="{name:'Index'}">首页</router-link>
+        </li>
+        <li>
           <router-link :to="{name:'Course'}">课程</router-link>
-          <router-link :to="{name:'Micro'}">学位</router-link>
+        </li>
+        <li>
           <router-link :to="{name:'News'}">深科技</router-link>
         </li>
+      </ul>
 
-        </ul>
-      <div>
-          <div v-if="this.$store.state.username">
+      <ul>
+        <li v-if="this.$store.state.username">
           <a>{{ this.$store.state.username }}</a>
           <a @click="logout">注销</a>
-        </div>
-          <router-link v-else to="/login">登录</router-link>
-        </div>
+        </li>
+        <li v-else>
+          <router-link :to="{name:'Login'}">登录</router-link>
+        </li>
+      </ul>
     </div>
 
     <div>
@@ -28,18 +33,13 @@
 
 <script>
   import Cookie from 'vue-cookies'
-  export default {
 
+  export default {
     name: 'app',
-    data() {
-      return {
-        msg: 'Welcome to Your Vue.js App'
-      }
-    },
-    methods:{
-      logout(){
-        this.$store.state.username=''
-        this.$store.state.token=''
+    methods: {
+      logout() {
+        this.$store.state.username = ''
+        this.$store.state.token = ''
         Cookie.remove('username')
         Cookie.remove('token')
       }
@@ -60,6 +60,15 @@
 
   h1, h2 {
     font-weight: normal;
+  }
+
+  .nav {
+    height: 80px;
+    background-color: aliceblue;
+  }
+
+  a {
+    color: #42b983;
   }
 
 </style>

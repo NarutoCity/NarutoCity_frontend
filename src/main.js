@@ -5,12 +5,13 @@ import App from './App.vue'
 import routerConfig from './router.config'
 
 import axios from 'axios'
-import store from  './store/store'
+import store from './store/store'
 
 Vue.use(VueRouter)
 Vue.use(ElementUI)
 Vue.prototype.$axios = axios
 Vue.prototype.$store = store
+
 const router = new VueRouter(routerConfig)
 
 new Vue({

@@ -24,11 +24,11 @@
           </div>
           <div style="cursor: pointer; margin-left:auto; margin-right: 30px" class="like-btn like-bkg"><i
             style="display:inline-block; margin-left: 25px" class="fa fa-thumbs-o-up" aria-hidden="true"
-          ></i> <span class="like-num" >点赞&nbsp;|&nbsp;<b>{{article.up_num}}</b></span>
+          ></i> <span class="like-num">点赞&nbsp;|&nbsp;<b>{{article.up_num}}</b></span>
           </div>
           <div style="cursor: pointer" class="like-btn love-bkg"><i
             style="display:inline-block; margin-left: 22px" class="fa fa-heart-o" aria-hidden="true"></i>
-            <span class="love-num" >收藏&nbsp;|&nbsp;<b>{{article.collect_num}}</b></span></div>
+            <span class="love-num">收藏&nbsp;|&nbsp;<b>{{article.collect_num}}</b></span></div>
         </div>
       </div>
       <div class="comment-wrap" style="padding-bottom: 300px">
@@ -60,6 +60,7 @@
 </template>
 <script>
   export default {
+    name: 'NewDetail',
     data() {
       return {
         article: {},

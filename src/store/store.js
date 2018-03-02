@@ -5,7 +5,6 @@ import Cookie from 'vue-cookies'
 Vue.use(Vuex);
 export default new Vuex.Store({
   // 组件中通过this.$store.state.username调用
-
   state: {
     username: Cookie.get('username'),
     token: Cookie.get('token'),
