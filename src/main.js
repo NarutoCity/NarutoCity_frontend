@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import axios from 'axios'
-import store from './store/store'
 import ElementUI from 'element-ui'
 import App from './App.vue'
 import routerConfig from './router.config'
+
+import axios from 'axios'
 import store from  './store/store'
 
 Vue.use(VueRouter)
