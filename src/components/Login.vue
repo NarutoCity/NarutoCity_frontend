@@ -26,7 +26,7 @@
         let that = this;
         this.$axios.request({
           url: this.$store.state.apiList.auth,
-          method: 'POST',
+          method: 'post',
           data: {
             username: this.username,
             password: this.password

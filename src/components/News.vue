@@ -38,9 +38,8 @@
         let that = this;
         this.$axios.request({
           url: this.$store.state.apiList.news,
-          method: 'GET',
         }).then(function (response) {
-          that.articleList = response.data.data.results
+          that.articleList = response.data
         }).catch(function (response) {
           alert(response)
         })

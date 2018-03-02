@@ -12,7 +12,6 @@ export default new Vuex.Store({
       auth: 'http://127.0.0.1:8000/api/login/',
       course: 'http://127.0.0.1:8000/api/courses/',
       news: 'http://127.0.0.1:8000/api/articles/',
-
     }
   },
   mutations: {
