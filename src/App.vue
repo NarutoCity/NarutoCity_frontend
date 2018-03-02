@@ -63,7 +63,6 @@
   }
 
   .nav {
-    height: 80px;
     background-color: aliceblue;
   }
 

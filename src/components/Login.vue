@@ -5,7 +5,7 @@
     <label for="">密码：</label>
     <input type="password" placeholder="请输入密码" v-model="password">
     <a class="btn" @click="doLogin">提交</a>
-    <p style="color: red;">{{ error }}</p>
+    <p class="errors">{{ error }}</p>
 
   </div>
 </template>
@@ -25,7 +25,7 @@
         console.log(this);
         let that = this;
         this.$axios.request({
-          url: 'http://127.0.0.1:8000/api/login/',
+          url: this.$store.state.apiList.auth,
           method: 'POST',
           data: {
             username: this.username,
@@ -33,7 +33,7 @@
           },
           responseType: 'json'
         }).then(function (response) {
-          if (response.data.status === '1000') {
+          if (response.data.status) {
             that.$store.commit('saveToken', response.data)
             that.$router.push('/index')
           } else {
@@ -44,3 +44,9 @@
     }
   }
 </script>
+
+<style>
+  .errors {
+    color: red;
+  }
+</style>
